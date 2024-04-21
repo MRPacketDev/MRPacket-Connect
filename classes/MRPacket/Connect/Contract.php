@@ -58,7 +58,7 @@ class Contract extends Call
 			return $status;
 		}
 
-		$requestJSON = json_encode($input);
+		$requestJSON = http_build_query($input);
 		if (!$requestJSON) {
 			throw new CrException("Failed to encode JSON request: " . $this->getJSONLastError());
 		}
@@ -70,16 +70,7 @@ class Contract extends Call
 
 		$endpoint .= '/api/packet';
 		$header 			= $this->buildHttpDefaultHeaders($this->token);
-		$post				= true;
-		$outputHeader		= true;
-		$userName	= null;
-		$password 	= null;
-		$curlTimeoutSeconds = 5;
-		$encoding			= "UTF-8";
-		$skipBody			= false;
 		$userAgent			= 'Connect b' . $this->build . ' ' . $this->shopFrameWorkName;
-		$verfiySSLPeer		= ENVIRONMENT == 'DEV' ? 0 : 1;
-		$verfiySSLHost		= ENVIRONMENT == 'DEV' ? 0 : 2;
 
 		if (ENVIRONMENT == 'DEV') {
 			$request = array(
@@ -90,8 +81,7 @@ class Contract extends Call
 			echo "REQUEST: (curl)<pre>" . var_export($request, true) . "</pre>\n";
 		}
 
-		/* send data to server */
-		$response = $curl->sendCurlRequest($endpoint, $requestJSON, $header, $post, $outputHeader, $userName, $password, $curlTimeoutSeconds, $encoding, $skipBody, $userAgent, $verfiySSLPeer, $verfiySSLHost);
+		$response = $curl->sendCurlRequest($endpoint, $requestJSON, $header, 'POST', $userAgent);
 		if (ENVIRONMENT == 'DEV') {
 			echo "RESPONSE: (curl)<pre>" . var_export($response, true) . "</pre>";
 		}
@@ -116,7 +106,7 @@ class Contract extends Call
 		return $status;
 	}
 
-	public function delete($pk)
+	public function delete($packetId)
 	{
 		$curl = new MyCurl();
 		$status = array(
@@ -130,18 +120,9 @@ class Contract extends Call
 			throw new CrException("Failed to load endpoint via Configloader.");
 		}
 
-		$endpoint .= '/api/packet';
+		$endpoint .= '/api/packet/' . $packetId;
 		$header 			= $this->buildHttpDefaultHeaders($this->token);
-		$post				= true;
-		$outputHeader		= true;
-		$userName	= null;
-		$password 	= null;
-		$curlTimeoutSeconds = 5;
-		$encoding			= "UTF-8";
-		$skipBody			= false;
 		$userAgent			= 'Connect b' . $this->build . ' ' . $this->shopFrameWorkName;
-		$verfiySSLPeer		= ENVIRONMENT == 'DEV' ? 0 : 1;
-		$verfiySSLHost		= ENVIRONMENT == 'DEV' ? 0 : 2;
 
 		if (ENVIRONMENT == 'DEV') {
 			$request = array(
@@ -152,8 +133,7 @@ class Contract extends Call
 			echo "REQUEST: (curl)<pre>" . var_export($request, true) . "</pre>\n";
 		}
 
-		/* send data to server */
-		$response = $curl->sendCurlRequest($endpoint, 'pk=' . $pk, $header, $post, $outputHeader, $userName, $password, $curlTimeoutSeconds, $encoding, $skipBody, $userAgent, $verfiySSLPeer, $verfiySSLHost);
+		$response = $curl->sendCurlRequest($endpoint, null, $header, 'DELETE', $userAgent);
 
 		if (ENVIRONMENT == 'DEV') {
 			echo "RESPONSE: (curl)<pre>" . var_export($response, true) . "</pre>";

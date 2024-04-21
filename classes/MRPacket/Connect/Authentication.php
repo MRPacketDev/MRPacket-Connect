@@ -37,16 +37,7 @@ class Authentication extends Call
 
 		$endpoint .= '/api/login';
 		$header 			= $this->buildHttpDefaultHeaders();
-		$post				= true;
-		$outputHeader		= true;
-		$userName	= null;
-		$password 	= null;
-		$curlTimeoutSeconds = 5;
-		$encoding			= "UTF-8";
-		$skipBody			= false;
 		$userAgent			= 'Connect b' . $this->build . ' ' . $this->shopFrameWorkName;
-		$verfiySSLPeer		= ENVIRONMENT == 'DEV' ? 0 : 1;
-		$verfiySSLHost		= ENVIRONMENT == 'DEV' ? 0 : 2;
 
 		if (ENVIRONMENT == 'DEV') {
 			$request = array(
@@ -57,7 +48,7 @@ class Authentication extends Call
 			echo "REQUEST: (curl)<pre>" . var_export($request, true) . "</pre>\n";
 		}
 
-		$response = $curl->sendCurlRequest($endpoint, $requestJSON, $header, $post, $outputHeader, $userName, $password, $curlTimeoutSeconds, $encoding, $skipBody, $userAgent, $verfiySSLPeer, $verfiySSLHost);
+		$response = $curl->sendCurlRequest($endpoint, $requestJSON, $header, 'POST', $userAgent);
 
 		if (ENVIRONMENT == 'DEV') {
 			echo "RESPONSE: (curl)<pre>" . var_export($response, true) . "</pre>";
