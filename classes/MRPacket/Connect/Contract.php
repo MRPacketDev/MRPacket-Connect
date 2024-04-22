@@ -109,12 +109,6 @@ class Contract extends Call
 	public function delete($packetId)
 	{
 		$curl = new MyCurl();
-		$status = array(
-			'success' 	=> false,
-			'data' 		=> null,
-			'errors'	=> array()
-		);
-
 		$endpoint = Configloader::load('settings', 'mrpacket_server_domain');
 		if (!$endpoint) {
 			throw new CrException("Failed to load endpoint via Configloader.");
@@ -143,14 +137,5 @@ class Contract extends Call
 		if ($httpcode != 204) {
 			throw new CrException("Unexpected status. Server responded with http code $httpcode.", $httpcode);
 		}
-
-		if ($result = json_decode($response['body'], true)) {
-			$status['success']  = true;
-			$status['data']		= $result;
-		} else {
-			throw new CrException("Failed to decode JSON response: " . $this->getJSONLastError(), $httpcode);
-		}
-
-		return $status;
 	}
 }
