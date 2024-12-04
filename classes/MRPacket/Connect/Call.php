@@ -66,7 +66,7 @@ class Call
 		$protocol 	= ($https ? 'https' : 'http');
 
 		$header = array(
-			'Content-Type: application/x-www-form-urlencoded',
+			'Content-Type: application/json',
 			'Accept: application/json',
 			'Accept-Language: de',
 			'Shop-Framework:' . $this->shopFrameWorkName,

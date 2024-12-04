@@ -16,12 +16,8 @@ class MyCurl
 	/**
 	 * @param String $endpoint				URL of the resource to be called.
 	 * @param String $payload				The data to be transmitted.
-	 * @param Array $header					List of headers to be encompassed in the request.
 	 * @param String $method			 	(optional)
-	 * @param Bool $skipBody				Only check for the response header. (optional)
 	 * @param String $userAgent				User agent to expose to the remote server. (optional)
-	 * @param Bool $verfiySSLPeer			Do verify peer. (optional)
-	 * @param Bool $verfiySSLHost			Do verify host. (optional)
 	 * @return array
 	 */
 	public function sendCurlRequest($endpoint, $payload, $header, $method = null, $userAgent = null)
