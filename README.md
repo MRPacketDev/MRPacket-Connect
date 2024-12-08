@@ -38,9 +38,3 @@ We have to insist that you use the predefined Staging URL of the MRPacket API pr
 ## License
 
 Please refer to the file LICENSE.txt for details.
-
-## Internal Remarks (do not publish)
-
-This code is the internal version. The public version is accessable for everybody at https://github.com/MRPacketDev/MRPacket-Connect
-To deploy changes you have to upload your changes to the repo after a new version is finised.
-
