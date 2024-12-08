@@ -25,7 +25,7 @@ class Authentication extends Call
 			'password'	=> trim($password)
 		);
 
-		$requestJSON = http_build_query($input);
+		$requestJSON = json_encode($input);
 		if (!$requestJSON) {
 			throw new CrException("Failed to encode JSON request. Bad data.");
 		}
