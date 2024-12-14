@@ -9,5 +9,5 @@
  */
 return array(
 	'build'						=> '1.0', //Don't touch! (will be used internally for User Agent setting in calls)
-	'mrpacket_server_domain'	=> ENVIRONMENT == 'DEV' ? 'https://mrpacket-preview.prowect.com' : 'https://www.mrpacket.de'
+	'mrpacket_server_domain'	=> ENVIRONMENT == 'DEV' || ENVIRONMENT == 'PREVIEW' ? 'https://mrpacket-preview.prowect.com' : 'https://www.mrpacket.de'
 );
